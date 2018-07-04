@@ -12,15 +12,22 @@ public class RegistrationTestSuit {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-        driver.quit();
-    }
+    //@AfterClass
+    //public static void tearDownClass() {
+    //    driver.quit();
+    //}
 
     @Test
     public void testCalculator() throws InterruptedException {
         RegistrationPage page = new RegistrationPage(driver);
         page.goToPage();
-
+        page.insertFirstLastName("Test name");
+        page.insertEmail("test@test.com");
+        page.insertPhone("123");
+        page.selectPosition(1);
+        page.insertLinkedinUrl("test");
+        page.insertMessage("test message");
+        page.clickOnConsentCheckbox();
+        //page.sendApplication();
     }
 }
