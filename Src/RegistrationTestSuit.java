@@ -10,6 +10,7 @@ public class RegistrationTestSuit {
     @BeforeClass
     public static void setUpClass() {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
     //@AfterClass
@@ -18,7 +19,7 @@ public class RegistrationTestSuit {
     //}
 
     @Test
-    public void testCalculator() throws InterruptedException {
+    public void testRegistration() throws InterruptedException {
         RegistrationPage page = new RegistrationPage(driver);
         page.goToPage();
         page.insertFirstLastName("Test name");

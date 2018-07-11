@@ -24,6 +24,7 @@ public class RegistrationPage {
         firstLastNameField.sendKeys(name);
     }
 
+
     public void insertEmail(String email) {
         WebElement emailField = driver.findElement(By.name("your-email"));
         emailField.sendKeys(email);
@@ -50,12 +51,21 @@ public class RegistrationPage {
     }
 
     public void clickOnConsentCheckbox() {
-        WebElement consentCheckbox = driver.findElement(By.name("checkbox-consent[]"));
+        WebElement consentCheckbox = driver.findElement(By.xpath("//*[@id=\"wpcf7-f4257-p5033-o1\"]/form/p[8]/span/span/span/input"));
         consentCheckbox.click();
     }
 
     public void sendApplication() {
         WebElement buttonSend = driver.findElement(By.cssSelector(".wpcf7-submit"));
         buttonSend.submit();
+    }
+    public void assertColorFirstLastName(String color) {
+        WebElement firstLastNameField = driver.findElement(By.name("your-name"));
+        Assert.assertEquals(color, firstLastNameField.getCssValue("border-top-color"));
+    }
+
+    public void assertMessage(String msg) {
+        WebElement errorMsg = driver.findElement(By.cssSelector(".wpcf7-response-output"));
+        Assert.assertEquals(msg, errorMsg.getAttribute("innerText"));
     }
 }
