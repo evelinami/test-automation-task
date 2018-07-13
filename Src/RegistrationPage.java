@@ -51,7 +51,7 @@ public class RegistrationPage {
     }
 
     public void clickOnConsentCheckbox() {
-        WebElement consentCheckbox = driver.findElement(By.xpath("//*[@id=\"wpcf7-f4257-p5033-o1\"]/form/p[8]/span/span/span/input"));
+        WebElement consentCheckbox = driver.findElement(By.cssSelector(".wpcf7-list-item > input:nth-child(1)"));
         consentCheckbox.click();
     }
 
@@ -59,12 +59,38 @@ public class RegistrationPage {
         WebElement buttonSend = driver.findElement(By.cssSelector(".wpcf7-submit"));
         buttonSend.submit();
     }
-    public void assertColorFirstLastName(String color) {
+
+    public void assertSuccessMessage(String msg) {
+            WebElement successMsg = driver.findElement(By.cssSelector("#wpcf7-f4257-p5033-o1 > form > div.wpcf7-response-output.wpcf7-display-none.wpcf7-spam-blocked"));
+            Assert.assertEquals(msg, successMsg.getAttribute("innerText"));
+        }
+
+    public void assertColorFirstLastName(String color) { //first name
         WebElement firstLastNameField = driver.findElement(By.name("your-name"));
         Assert.assertEquals(color, firstLastNameField.getCssValue("border-top-color"));
     }
 
-    public void assertMessage(String msg) {
+    public void assertColorEmail(String color) { //email
+        WebElement emailField = driver.findElement(By.name("your-email"));
+        Assert.assertEquals(color, emailField.getCssValue("border-top-color"));
+    }
+
+    public void assertColorPhone(String color) { //phone
+        WebElement phoneField = driver.findElement(By.name("your-phone"));
+        Assert.assertEquals(color, phoneField.getCssValue("border-top-color"));
+    }
+
+    public void assertColorPosition(String color) { //position
+            WebElement positionDropdown = driver.findElement(By.name("menu-640"));
+            Assert.assertEquals(color, positionDropdown.getCssValue("border-top-color"));
+    }
+
+    public void assertColorConsentCheckboxField(String color) {
+        WebElement consentCheckboxField = driver.findElement(By.cssSelector("#wpcf7-f4257-p5033-o1 > form > p:nth-child(9) > span > span.wpcf7-form-control.wpcf7-checkbox.wpcf7-validates-as-required.wpcf7-not-valid"));
+        Assert.assertEquals(color, consentCheckboxField.getCssValue("border-top-color"));
+    }
+
+    public void assertValidationFailureMessage(String msg) {
         WebElement errorMsg = driver.findElement(By.cssSelector(".wpcf7-response-output"));
         Assert.assertEquals(msg, errorMsg.getAttribute("innerText"));
     }
